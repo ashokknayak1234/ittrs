@@ -1,0 +1,29 @@
+# SLA business rules — configurable.
+# Loaded at startup; overridable at runtime via the admin dashboard:
+#   PUT /api/admin/sla-config   (settings panel under Admin dashboard)
+#
+# Reference: severity x category multiplier -> effective resolution target.
+severity_sla_hours:
+  Critical: 2
+  High: 8
+  Medium: 24
+  Low: 72
+
+category_multipliers:
+  Security: 0.5
+  Billing: 1.0
+  Access: 1.0
+  Network: 1.0
+  Hardware: 1.0
+  Software: 1.0
+  General: 1.5
+
+# Breach-risk level is derived from the effective resolution target (hours):
+risk_thresholds_hours:
+  high: 4      # effective hours <= 4   -> High breach risk
+  medium: 12   # effective hours <= 12  -> Medium breach risk
+               # otherwise                            -> Low breach risk
+
+# Workload-aware prediction: when the assigned team already carries at least
+# this many open tickets, the breach risk is bumped one level.
+workload_bump_threshold: 3

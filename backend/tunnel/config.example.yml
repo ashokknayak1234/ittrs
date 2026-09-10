@@ -1,0 +1,17 @@
+# Copy to config.yml, then replace all placeholders using the NEW account.
+# Configure the Access application and Service Auth policy BEFORE starting.
+tunnel: REPLACE_WITH_TUNNEL_UUID
+credentials-file: 'C:/Users/YOUR_WINDOWS_USER/.cloudflared/REPLACE_WITH_TUNNEL_UUID.json'
+
+ingress:
+  - hostname: ollama.example.com
+    path: ^/api/chat$
+    service: http://127.0.0.1:11434
+    originRequest:
+      httpHostHeader: localhost:11434
+      access:
+        required: true
+        teamName: REPLACE_WITH_ZERO_TRUST_TEAM_NAME
+        audTag:
+          - REPLACE_WITH_ACCESS_APPLICATION_AUD
+  - service: http_status:404

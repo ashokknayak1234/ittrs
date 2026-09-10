@@ -1,0 +1,12 @@
+[project]
+name = "ittrs-backend"
+version = "1.0.0"
+requires-python = ">=3.13"
+dependencies = ["fastapi", "pydantic", "pyyaml"]
+
+[dependency-groups]
+dev = ["workers-py", "workers-runtime-sdk", "pytest", "httpx", "uvicorn"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
